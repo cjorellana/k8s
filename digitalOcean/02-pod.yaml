@@ -7,8 +7,23 @@ metadata:
   labels:
       app: web
 spec:
+  volumes:
+  - name: my-volume
+    emptyDir: {}
+
   containers:
-  - name: nginx
-    image: nginx:alpine
+  - name: nginx1
+    image: nginx:stable-alpine
+    volumeMounts:
+    - name: my-volume
+      mountPath: /usr/share/nginx/html
     ports:
-        - containerPort: 80
+    - containerPort: 8080
+    imagePullPolicy: Always
+  
+  - name: linux1
+    image: debian
+    volumeMounts:
+    - name: my-volume
+      mountPath: /html
+    

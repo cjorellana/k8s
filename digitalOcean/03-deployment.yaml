@@ -1,27 +1,23 @@
-piVersion: apps/v1
+apiVersion: v1
+
 kind: Deployment
+
 metadata:
-  name: testk8s-deploy
+  name: deploy-laravel
   labels:
-    app: testk8s-app
-    test: test
-  annotations:
-    fluxcd.io/tag.example-app: semver:~1.0
-    fluxcd.io/automated: "true"
-spec:
-  selector:
-    matchLabels:
-      app: testk8s-app
-  replicas: 2
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
-  template:
-    metadata:
+    app: web
+  
+  spec:
+    replicas: 2
+    
+    selector:
+      matchLabels:
+      app: web1
+
+    template:
+      metadata:
       labels:
-        app: testk8s-app
+        app: web1
     spec:
       containers:
         - name: testk8s-app

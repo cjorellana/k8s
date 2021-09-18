@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravel-app
+  labels:
+    app: laravel
+spec:
+  selector:
+    matchLabels:
+      app: laravel
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: laravel
+        tier: frontend
+    spec:
+      containers:
+      - image: nginx:stable
+        name: web-nginx       
+        ports:
+        - containerPort: 80
+          name: laravel
+        volumeMounts:
+        - name: laravel-data
+          mountPath: /var/www/html
+      volumes:
+      - name: laravel-data
+        persistentVolumeClaim:
+          claimName: laravel-pv-claim
