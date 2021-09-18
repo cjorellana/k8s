@@ -22,7 +22,7 @@ spec:
         name: web-nginx       
         ports:
         - containerPort: 80
-          name: laravel
+          name: laravel-port
         volumeMounts:
         - name: laravel-data
           mountPath: /var/www/html
